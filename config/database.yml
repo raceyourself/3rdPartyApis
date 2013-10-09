@@ -1,18 +1,18 @@
 development:
   adapter: mysql2
-  database: gf_core_development
+  database: gf_internal_development
   host: localhost
   username: root
 
 test:
   adapter: mysql2
-  database: gf_core_test
+  database: gf_internal_test
   host: localhost
   username: root
 
 production:
   adapter: mysql2
-  database: gf_core
+  database: gf_internal
   host: localhost
   username: root
   password: ex171aY555
