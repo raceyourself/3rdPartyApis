@@ -1,7 +1,18 @@
-.row-fluid
-  .span8.hero-unit
-    %h2 GlassFit Games
-    %p.lead Welcome to the homepage
+%section
+  .row
+    .span16
+      - unless signed_in?
+        %h3 Sign in first to explore the provider's API
+        %p= link_to "Sign in with OAuth 2 provider", user_omniauth_authorize_path(:glassfit_doorkeeper), :class => "btn primary"
+      - else
+        %h2 Explore the api
+        .well
+          = link_to "Positions", positions_path, :class => "btn"
+          = link_to "Sign out", destroy_user_session_path, :method => :delete, :class => "btn primary"
+          You are logged in as
+          = current_user.email
 
-    = link_to 'My Account', edit_user_registration_path
-    = link_to 'Manage Apps', '/oauth/applications'
+        %p
+          %pre#display-json
+            Select one of the api methods above
+
