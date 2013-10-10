@@ -1,7 +1,21 @@
-%h2 Test successful!
-- @positions.each do |position|
-  %p 
-    = position.ts 
-    = position.lat 
-    = position.lng
+= javascript_include_tag "https://maps.googleapis.com/maps/api/js?sensor=false&key=AIzaSyBj_iHOwteDxJ8Rj_bPsoslxIquy--y9nI"
+%h2 #{@positions.length} GPS positions
+:javascript
+  var map;
+  var positions = #{@positions.to_json};
+  function initialize() {
+    var mapOptions = {
+      zoom: 16,
+      center: new google.maps.LatLng(positions[positions.length-1].lat, positions[positions.length-1].lng),
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
+    jQuery.each(positions, function(index, position) {
+      new google.maps.Marker({position: new google.maps.LatLng(position.lat, position.lng), title: 'track: '+position.track_id+' at '+position.ts}).setMap(map);
+    });
+  }
+  google.maps.event.addDomListener(window, 'load', initialize);
+#map-canvas{ :style => "width:800px; height:600px; margin: 0px; padding: 0px;" }
+:css
+  #map-canvas img { max-width: none; max-width: none;}
