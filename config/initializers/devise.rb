@@ -2,14 +2,10 @@
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
 
-  require 'omniauth-facebook'
-  require 'omniauth-twitter'
   OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE if Rails.env.development? 
 
-  config.omniauth :facebook, CONFIG[:facebook][:client_id], CONFIG[:facebook][:client_secret], {
-    scope: CONFIG[:facebook][:scope]
-  }
-  config.omniauth :twitter, CONFIG[:twitter][:client_id], CONFIG[:twitter][:client_secret]
+  require File.expand_path('lib/omniauth/strategies/glassfitdoorkeeper', Rails.root)
+  config.omniauth :glassfit_doorkeeper, CONFIG[:glassfit][:client_id], CONFIG[:glassfit][:client_secret]
   
   # config.omniauth :linkedin, "APP_ID", "APP_SECRET"
   # config.omniauth :github, "APP_ID", "APP_SECRET"

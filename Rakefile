@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-GfAuthenticate::Application.load_tasks
+GfInternalWeb::Application.load_tasks

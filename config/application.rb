@@ -11,7 +11,7 @@ require "sprockets/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env)
 
-module GfAuthenticate
+module GfInternalWeb
   class Application < Rails::Application
 
     # This can probably come out

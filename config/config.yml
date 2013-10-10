@@ -1,30 +1,15 @@
 development:
-  facebook:
-    client_id: '667205069970184'
-    client_secret: 'c353ef6e2322a6342b349933651193ab'
-    scope: 'email, offline_access'
-
-  twitter:
-    client_id: 7l2GOzjpGLlTj2SUF0Zww'
-    client_secret: 'fXXPPLt60SQAM7lUpZeqoJ07jYHaNNi1kpPwAsrMew'
+  glassfit:
+    client_id: 'b387e7ab99b12fbdd26cdebd8bf4ee09e5b899fc60a388c02b01a0524a2d235a'
+    client_secret: '87d74cfb184bad3506f175ac222a501260971acf59ae591c41154153be8cb363'
 
 production:
-  facebook:
-    client_id: '1384077758490171'
-    client_secret: '49cc428daa785a71e8d8b163a9210f8d'
-    scope: 'email, offline_access'
+  glassfit:
+    client_id: '3ff27e79c45e147cbf8137c39c0b50c336d46bea014529e1279600b8448ce69b'
+    client_secret: '4a493051eaf55f2e4ecc5b09c7da11c2c0dd77426c7eb48d13fa8c8218ed1d64'
 
-  twitter:
-    client_id: NAs6Vh3PtN7Pv7ULG7eCyA'
-    client_secret: '3E8RgvAGjCrnqynkrCPfBI6KVdIK4u9iXt8WGPVyLq0'
-    
 test:
-  facebook:
-    client_id: 'dummyid'
-    client_secret: 'dummysecret'
-    scope: 'email, offline_access'
-
-  twitter:
+  glassfit:
     client_id: 'dummyid'
     client_secret: 'dummysecret'
 
