@@ -11,9 +11,9 @@ before 'deploy:setup', 'rvm:create_gemset' # only create gemset
 
 default_run_options[:pty] = true  # Must be set for the password prompt
                                   # from git to work
-set :application, "glassfit_internal"
+set :application, "glassfit_external"
 set :deploy_to, File.join("", "var", "www", "vhosts", application)
-set :repository,  "git@github.com:glassfit/GFInternalWeb.git"
+set :repository,  "git@github.com:glassfit/GFExternalWeb.git"
 set :scm, "git"
 set :user, "deployer"  # The server's user for deploys
 
