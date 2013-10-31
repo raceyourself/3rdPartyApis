@@ -1,12 +1,12 @@
 development:
   glassfit:
-    client_id: 'b387e7ab99b12fbdd26cdebd8bf4ee09e5b899fc60a388c02b01a0524a2d235a'
-    client_secret: '87d74cfb184bad3506f175ac222a501260971acf59ae591c41154153be8cb363'
+    client_id: '2f975b48a743c87972e795edd4646564ddc282dd7c33f6edbb3d601aa23dbfe2'
+    client_secret: '3b4965d3f18d8839d660b108924e82a311e7011ca51af35ce88c2d9afab50e4d'
 
 production:
   glassfit:
-    client_id: '3ff27e79c45e147cbf8137c39c0b50c336d46bea014529e1279600b8448ce69b'
-    client_secret: '4a493051eaf55f2e4ecc5b09c7da11c2c0dd77426c7eb48d13fa8c8218ed1d64'
+    client_id: '5d1d58190a87a7fedc9510c2ef8eb163da13347595f8f913d2b665f8b63edeb8'
+    client_secret: '3bace37339e59cbbcb2f9e300ff7e4989f9ad6346acebc5c467c20a76dca4f94'
 
 test:
   glassfit:
