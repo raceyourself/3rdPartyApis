@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-GfInternalWeb::Application.load_tasks
+GfExternalWeb::Application.load_tasks
