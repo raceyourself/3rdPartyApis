@@ -1,0 +1,15 @@
+%html
+  %head{:prefix => 'og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# fitness: http://ogp.me/ns/fitness#'}
+    %title #{@track.track_name}
+    %meta{:property => 'fb:app_id', :content => facebook_app_id()}
+    %meta{:property => 'og:type', :content => 'fitness.course'}
+    %meta{:property => 'og:url', :content => @url}
+    %meta{:property => 'og:title', :content => @track.track_name}
+    %meta{:property => 'og:image', :content => image_url('fb_track.png')}
+    %meta{:property => 'og:description', :content => "#{@track.user_id} ran/jogged/something Nkm?"}
+    - @track.positions.each do |position|
+      %meta{:property => 'fitness:metrics:location:latitude', :content => position.lat}
+      %meta{:property => 'fitness:metrics:location:longitude', :content => position.lng}
+      %meta{:property => 'fitness:metrics:timestamp', :content => format_timestamp(position.gps_ts)}
+  %body
+    %p Track name: #{@track.track_name}

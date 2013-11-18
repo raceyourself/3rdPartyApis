@@ -1,9 +1,9 @@
-require File.expand_path('lib/glassfit/positionsclient', Rails.root)
+require 'glassfit/positionsclient'
 
 class HomeController < ApplicationController 
 
   def positions
-    @positions = PositionsClient.new(current_user.doorkeeper_access_token).positions()
+    @positions = Glassfit::PositionsClient.new(current_user.doorkeeper_access_token).positions()
   end
 
 end

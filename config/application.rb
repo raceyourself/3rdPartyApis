@@ -42,6 +42,7 @@ module GfExternalWeb
     config.action_mailer.default_url_options = { host: 'glassfit.dannyhawkins.co.uk' }
 
     config.autoload_paths += %W(#{config.root}/app/workers)
+    config.autoload_paths += %W(#{config.root}/lib/glassfit)
 
     config.generators do |g|
       g.orm                 :active_record

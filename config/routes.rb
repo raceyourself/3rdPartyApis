@@ -8,4 +8,6 @@ GfExternalWeb::Application.routes.draw do
   root :to => 'home#index'
   get 'positions' => 'home#positions', :as => :positions
 
+  get 'tracks/:id' => 'track#show'
+
 end
