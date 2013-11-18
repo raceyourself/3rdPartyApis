@@ -9,12 +9,12 @@ module OmniAuth
       }
 
       uid do
-        raw_info["id"]
+        raw_info["response"]["id"]
       end
 
       info do
         {
-          :email => raw_info["email"]
+          :email => raw_info["response"]["email"]
         }
       end
 

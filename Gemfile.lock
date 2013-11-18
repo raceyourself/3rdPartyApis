@@ -413,6 +413,7 @@ DEPENDENCIES
   letter_opener
   mongoid_rails4
   mysql2
+  oauth2
   omniauth
   omniauth-facebook
   omniauth-twitter

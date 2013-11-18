@@ -48,6 +48,7 @@ gem 'dalli'
 gem 'rack-cache'
 
 #api
+gem 'oauth2'
 gem 'rocket_pants'
 
 # admin
