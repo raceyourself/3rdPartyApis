@@ -5,7 +5,9 @@ Devise.setup do |config|
   OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE if Rails.env.development? 
 
   require File.expand_path('lib/omniauth/strategies/glassfitdoorkeeper', Rails.root)
-  config.omniauth :glassfit_doorkeeper, CONFIG[:glassfit][:client_id], CONFIG[:glassfit][:client_secret]
+  config.omniauth :glassfit_doorkeeper, CONFIG[:glassfit][:client_id], CONFIG[:glassfit][:client_secret], {
+    site: CONFIG[:glassfit][:site]
+  }
   
   # config.omniauth :linkedin, "APP_ID", "APP_SECRET"
   # config.omniauth :github, "APP_ID", "APP_SECRET"

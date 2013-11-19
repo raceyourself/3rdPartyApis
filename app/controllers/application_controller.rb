@@ -1,26 +1,37 @@
 class ApplicationController < ActionController::Base
-  @@server_uid = 13
+  rescue_from RocketPants::NotFound, :with => :render_404
+
   @@facebook_app_id = 625999614089605
-  @@server_user = nil
+  @@server_token = nil
+
+  def render_404
+    raise ActionController::RoutingError.new('Not Found')
+  end
  
   protected
 
-  def current_or_public_user
+  def user_or_public_access_token
     if current_user.present?
-      access_token = current_user
+      access_token = current_user.doorkeeper_access_token
     else
-      access_token = server_user()
+      access_token = server_token()
     end
   end
 
-  def server_user
-    if @@server_user.nil?
-      @@server_user = User.where(doorkeeper_uid: @@server_uid).first
-      unless @@server_user.present? && @@server_user.doorkeeper_access_token.present?
-        raise "The server's API client does not have an access token. Have an admin initialize the server"
-      end
+  def server_token
+    if @@server_token.nil?
+      client = OAuth2::Client.new( CONFIG[:glassfit][:client_id], 
+                                   CONFIG[:glassfit][:client_secret], 
+                                   :site => CONFIG[:glassfit][:site] )
+      @@server_token = client.password.get_token('externalweb@glassfitgames.com', 'testing123')
     end
-    @@server_user
+    if @@server_token.nil?
+      raise "Server cannot access API"
+    end
+    if @@server_token.expired?
+      @@server_token.refresh!
+    end
+    @@server_token.token
   end
 
   def format_timestamp(timestamp)
