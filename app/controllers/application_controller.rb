@@ -19,6 +19,9 @@ class ApplicationController < ActionController::Base
   end
 
   def server_token
+    if @@server_token.expired?
+      @@server_token = nil
+    end
     if @@server_token.nil?
       client = OAuth2::Client.new( CONFIG[:glassfit][:client_id], 
                                    CONFIG[:glassfit][:client_secret], 
@@ -28,7 +31,7 @@ class ApplicationController < ActionController::Base
     if @@server_token.nil?
       raise "Server cannot access API"
     end
-    if @@server_token.expired?
+      # TODO: Fix refresing API-side
       @@server_token.refresh!
     end
     @@server_token.token
