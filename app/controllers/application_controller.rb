@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  rescue_from RocketPants::Error, :with => :render_500
   rescue_from RocketPants::NotFound, :with => :render_404
 
   @@facebook_app_id = 625999614089605
@@ -6,6 +7,11 @@ class ApplicationController < ActionController::Base
 
   def render_404
     raise ActionController::RoutingError.new('Not Found')
+  end
+
+  def render_500(e)
+    @@server_token = nil
+    raise e
   end
  
   protected
