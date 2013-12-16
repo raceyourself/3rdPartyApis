@@ -1,0 +1,82 @@
+= javascript_include_tag "https://maps.googleapis.com/maps/api/js?sensor=false&key=AIzaSyBj_iHOwteDxJ8Rj_bPsoslxIquy--y9nI"
+%h2 #{@positions.length} GPS positions
+%form{id: 'plotform', onsubmit: "return plot_form();"}
+  %select
+  %input{:type => 'submit', :value => 'Plot'}
+%form{id: 'clearform', onsubmit: "return clear_form();"}
+  %select
+  %input{:type => 'submit', :value => 'Clear'}
+:javascript
+  var map;
+  var tracks = #{@positions.map{|p| p.track_id}.uniq.sort.reverse.to_json};
+  var positions = #{@positions.to_json};
+  var lineSymbol = { path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW };
+  function initialize() {
+    var mapOptions = {
+      zoom: 16,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+    jQuery.each(tracks, function(i, t) { 
+      $('#plotform select').append($('<option/>').val(t).text("Track "+t)); 
+    });
+    plot_form();
+  }
+  function plot_form() {
+    var track = ~~$('#plotform select').val();
+    plotTrack(track);
+    $('#plotform select option[value='+track+']').each(function() {
+      $('#clearform select').append($(this).clone());
+      $(this).remove();
+    });
+    $('#clearform select').val(track);
+    return false;
+  }
+  function clear_form() {
+    var track = ~~$('#clearform select').val();
+    clearTrack(track);
+    $('#clearform select option[value='+track+']').each(function() {
+      $('#plotform select').append($(this).clone());
+      $(this).remove();
+    });
+    $('#plotform select').val(track);
+    return false;
+  }
+  function plotTrack(track_id) {
+    var first_position;
+    jQuery.each(positions, function(index, position) {
+      if (position.track_id !== track_id) return;
+      var latlong = new google.maps.LatLng(position.lat, position.lng);
+      first_position = first_position || latlong;
+      //new google.maps.Marker({position: latlong, title: 'track: '+position.track_id+' at '+position.ts}).setMap(map);
+      position.epeCircle = new google.maps.Circle({
+        strokeColor: '#555555',
+        strokeOpacity: 0.2,
+        strokeWeight: 1,
+        fillOpacity: 0,
+        map: map,
+        center: latlong,
+        radius: position.epe
+      });
+      var bearing = new google.maps.LatLng(latlong.lat()+Math.cos(position.bearing*Math.PI/180)*position.epe/111229/2, latlong.lng()+Math.sin(position.bearing*Math.PI/180)*position.epe/111229/2);
+      position.bearingLine = new google.maps.Polyline({
+        path: [latlong, bearing],
+        strokeColor: '#'+((track_id*42)%0xffff).toString(16),
+        strokeOpacity: 0.5,
+        icons: [{ icon: lineSymbol, offset: '100%'}],
+        map: map
+      });
+    });
+    map.setCenter(first_position);
+  }
+  function clearTrack(track_id) {
+    jQuery.each(positions, function(index, position) {
+      if (position.track_id !== track_id) return;
+      position.epeCircle.setMap(null);
+      position.bearingLine.setMap(null);
+    });
+  }
+  google.maps.event.addDomListener(window, 'load', initialize);
+#map-canvas{ :style => "width:800px; height:600px; margin: 0px; padding: 0px;" }
+:css
+  #map-canvas img { max-width: none; max-width: none;}

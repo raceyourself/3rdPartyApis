@@ -1,0 +1,18 @@
+development:
+  glassfit:
+    client_id: '2f975b48a743c87972e795edd4646564ddc282dd7c33f6edbb3d601aa23dbfe2'
+    client_secret: '3b4965d3f18d8839d660b108924e82a311e7011ca51af35ce88c2d9afab50e4d'
+    site: 'http://glassfit.dannyhawkins.co.uk/'
+
+production:
+  glassfit:
+    client_id: '5d1d58190a87a7fedc9510c2ef8eb163da13347595f8f913d2b665f8b63edeb8'
+    client_secret: '3bace37339e59cbbcb2f9e300ff7e4989f9ad6346acebc5c467c20a76dca4f94'
+    site: 'http://glassfit.dannyhawkins.co.uk/'
+
+test:
+  glassfit:
+    client_id: 'dummyid'
+    client_secret: 'dummysecret'
+    site: 'http://glassfit.dannyhawkins.co.uk/'
+
