@@ -1,5 +1,6 @@
 module Glassfit
   class Position < APISmith::Smash
+    property :device_id
     property :track_id
     property :state_id
     property :gps_ts

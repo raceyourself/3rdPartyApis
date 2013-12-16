@@ -1,0 +1,10 @@
+%html
+  %head
+    %title #{@challenger_id} has challenged you to a #{@challenge.type} run!
+  %body
+    %p #{@challenger_id} has challenged you to a #{@challenge.type} run: <b>#{@taunt}</b>
+    %p Challenge: #{@challenge._id}
+    %p #{@challenge.attempts.select {|attempt| attempt['user_id'] == @challenger_id.to_i }.first}
+    %p
+    %a{:href => '#'} Log in to race!
+    %a{:href => '#'} Register to race!

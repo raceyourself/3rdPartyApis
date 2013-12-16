@@ -9,5 +9,8 @@ GfExternalWeb::Application.routes.draw do
   get 'positions' => 'home#positions', :as => :positions
 
   get 'tracks/:id' => 'track#show'
+  get 'challenges/:id' => 'challenge#show'
+
+  get 'leaderboard' => 'leaderboard#index';
 
 end
